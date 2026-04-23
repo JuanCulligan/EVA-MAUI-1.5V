@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools">
+	<application android:allowBackup="true"
+	             android:icon="@mipmap/appicon"
+	             android:roundIcon="@mipmap/appicon_round"
+	             android:supportsRtl="true"
+	             android:usesCleartextTraffic="true"
+	             android:theme="@style/EvaTheme">
+
+		<!-- Mapbox common antes que Mono (initOrder &gt; MonoRuntimeProvider). -->
+		<provider
+			android:name="com.eva.app.EvaMapboxEarlyInitProvider"
+			android:authorities="${applicationId}.eva-mapbox-early-init"
+			android:exported="false"
+			android:initOrder="2000000000" />
+
+		<!-- Quitar auto-init Mapbox del Startup; el provider anterior inicializa common. -->
+		<provider
+			android:name="androidx.startup.InitializationProvider"
+			android:authorities="${applicationId}.androidx-startup"
+			android:exported="false"
+			tools:node="merge">
+			<meta-data
+				android:name="com.mapbox.common.MapboxSDKCommonInitializer"
+				tools:node="remove" />
+			<meta-data
+				android:name="com.mapbox.maps.loader.MapboxMapsInitializer"
+				tools:node="remove" />
+		</provider>
+
+		<!-- Actividad nativa opcional (Mapbox AAR); no usar process distinto al principal. -->
+		<activity
+			android:name="com.eva.nav.NativeNavigationActivity"
+			android:exported="false"
+			android:launchMode="singleTask"
+			android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+	</application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+</manifest>

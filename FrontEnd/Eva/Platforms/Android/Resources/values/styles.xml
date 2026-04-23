@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tema que unifica barras del sistema con el fondo de la app (#0D0D0D) -->
+    <style name="EvaTheme" parent="@style/Maui.SplashTheme">
+        <item name="android:statusBarColor">@color/app_bar_background</item>
+        <item name="android:navigationBarColor">@color/app_bar_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+</resources>

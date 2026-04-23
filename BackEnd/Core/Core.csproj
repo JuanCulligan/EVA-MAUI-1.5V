@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{85109EF1-FF0F-4E8C-823C-B0F3E3C01026}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\Models\ChargerStation.cs" />
+    <Compile Include="Entities\Models\ChargerConnection.cs" />
+    <Compile Include="Entities\Models\DrivingConditions.cs" />
+    <Compile Include="Entities\Models\Error.cs" />
+    <Compile Include="Entities\Models\Location.cs" />
+    <Compile Include="Entities\Models\Log.cs" />
+    <Compile Include="Entities\Models\RoutePoint.cs" />
+    <Compile Include="Entities\Models\RouteSegment.cs" />
+    <Compile Include="Entities\Models\User.cs" />
+    <Compile Include="Entities\Models\VehicleSpecs.cs" />
+    <Compile Include="Entities\Request\BatteryEstimationRequest.cs" />
+    <Compile Include="Entities\Request\ReqActivateUser.cs" />
+    <Compile Include="Entities\Request\ReqDeleteFavorite.cs" />
+    <Compile Include="Entities\Request\ReqDeleteHistory.cs" />
+    <Compile Include="Entities\Request\ReqDeleteVehicle.cs" />
+    <Compile Include="Entities\Request\ReqEnterUser.cs" />
+    <Compile Include="Entities\Request\ReqGetFavorites.cs" />
+    <Compile Include="Entities\Request\ReqGetRecentLocations.cs" />
+    <Compile Include="Entities\Request\ReqGetUser.cs" />
+    <Compile Include="Entities\Request\ReqGetVehicle.cs" />
+    <Compile Include="Entities\Request\ReqLogin.cs" />
+    <Compile Include="Entities\Request\ReqLogout.cs" />
+    <Compile Include="Entities\Request\ReqLogs.cs" />
+    <Compile Include="Entities\Request\ReqNearbyChargers.cs" />
+    <Compile Include="Entities\Request\ReqSaveFavorite.cs" />
+    <Compile Include="Entities\Request\ReqSaveRecentLocation.cs" />
+    <Compile Include="Entities\Request\ReqSaveVehicle.cs" />
+    <Compile Include="Entities\Request\ReqUpdateUser.cs" />
+    <Compile Include="Entities\Request\ReqUpdateVehicle.cs" />
+    <Compile Include="Entities\Response\BatteryEstimationResponse.cs" />
+    <Compile Include="Entities\Response\ConsumoItem.cs" />
+    <Compile Include="Entities\Response\ResActivateUser.cs" />
+    <Compile Include="Entities\Response\ResBase.cs" />
+    <Compile Include="Entities\Response\ResDeleteFavorite.cs" />
+    <Compile Include="Entities\Response\ResDeleteHistory.cs" />
+    <Compile Include="Entities\Response\ResDeleteVehicle.cs" />
+    <Compile Include="Entities\Response\ResEnterUser.cs" />
+    <Compile Include="Entities\Response\ResGetFavorites.cs" />
+    <Compile Include="Entities\Response\ResGetRecentLocations.cs" />
+    <Compile Include="Entities\Response\ResGetUser.cs" />
+    <Compile Include="Entities\Response\ResGetVehicle.cs" />
+    <Compile Include="Entities\Response\ResHistorialConsumo.cs" />
+    <Compile Include="Entities\Response\ResLog.cs" />
+    <Compile Include="Entities\Response\ResLogin.cs" />
+    <Compile Include="Entities\Response\ResLogout.cs" />
+    <Compile Include="Entities\Response\ResNearbyChargers.cs" />
+    <Compile Include="Entities\Response\ResSaveFavorite.cs" />
+    <Compile Include="Entities\Response\ResSaveRecentLocation.cs" />
+    <Compile Include="Entities\Response\ResSaveVehicle.cs" />
+    <Compile Include="Entities\Response\ResUpdateUser.cs" />
+    <Compile Include="Entities\Response\ResUpdateVehicle.cs" />
+    <Compile Include="Enums\EnumErrors.cs" />
+    <Compile Include="Enums\EnumLog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

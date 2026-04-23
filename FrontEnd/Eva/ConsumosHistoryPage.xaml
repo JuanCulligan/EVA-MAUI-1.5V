@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eva.ConsumosHistoryPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#0D0D0D">
+
+    <Grid>
+        <Image
+            Source="circles_pattern.svg"
+            Aspect="AspectFill"
+            Opacity="1"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+        <BoxView Color="#0D0D0D" Opacity="0.55" HorizontalOptions="Fill" VerticalOptions="Fill" />
+
+        <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="32,48,32,24" RowSpacing="0">
+            <VerticalStackLayout Grid.Row="0" Spacing="0" Margin="0,0,0,16">
+                <Label
+                    Text="← Volver"
+                    FontSize="14"
+                    TextColor="#888888"
+                    Margin="0,0,0,8">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnVolverTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    Text="Consumos"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    TextColor="#E5E5E5"
+                    Margin="0,0,0,8" />
+                <Label x:Name="lblStatus"
+                       FontSize="13"
+                       TextColor="#888888"
+                       LineBreakMode="WordWrap" />
+            </VerticalStackLayout>
+
+            <Border Grid.Row="1"
+                    Stroke="#2A2A2A"
+                    StrokeThickness="1"
+                    BackgroundColor="#1A1A1A"
+                    Padding="16,12"
+                    StrokeShape="RoundRectangle 12"
+                    Margin="0,0,0,14">
+                <HorizontalStackLayout Spacing="16" HorizontalOptions="Center">
+                    <Label Text="Moneda (₡)" VerticalOptions="Center" TextColor="#A3A3A3" FontSize="14" />
+                    <Switch x:Name="switchKwh" Toggled="OnSwitchToggled" OnColor="#2A2A2A" ThumbColor="#E5E5E5" />
+                    <Label Text="kWh" VerticalOptions="Center" TextColor="#A3A3A3" FontSize="14" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <Button Grid.Row="2"
+                    Text="Registrar consumo actual"
+                    Clicked="OnRegistrarConsumoClicked"
+                    BackgroundColor="#2A2A2A"
+                    TextColor="#E5E5E5"
+                    FontSize="16"
+                    CornerRadius="12"
+                    HeightRequest="52"
+                    BorderWidth="0"
+                    Margin="0,0,0,16" />
+
+            <RefreshView x:Name="refreshView" Grid.Row="3" Refreshing="OnRefreshing">
+                <CollectionView x:Name="listConsumos" EmptyView="No hay consumos registrados.">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="#2A2A2A"
+                                    StrokeThickness="1"
+                                    BackgroundColor="#1A1A1A"
+                                    Padding="16,14"
+                                    Margin="0,0,0,10"
+                                    StrokeShape="RoundRectangle 12">
+                                <Label Text="{Binding .}"
+                                       FontSize="14"
+                                       TextColor="#E5E5E5"
+                                       LineBreakMode="WordWrap" />
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <ActivityIndicator x:Name="spinner"
+                               Grid.Row="3"
+                               IsRunning="False"
+                               IsVisible="False"
+                               Color="#E5E5E5"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

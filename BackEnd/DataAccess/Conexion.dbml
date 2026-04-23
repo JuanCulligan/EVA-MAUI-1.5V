@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB_EVA_" Class="ConexionDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DB_EVA_;Integrated Security=True" SettingsObjectName="DataAccess.Properties.Settings" SettingsPropertyName="DB_EVA_ConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.SP_InsertarConsumoDinero" Method="SP_InsertarConsumoDinero">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="NOMBRE_REFERENCIA" Parameter="nOMBRE_REFERENCIA" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="MONTO" Parameter="mONTO" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_ObtenerViajesGuardados" Method="SP_ObtenerViajesGuardados">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="SP_ObtenerViajesGuardadosResult">
+      <Column Name="NOMBRE_VIAJE" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="LATITUD_DESTINO" Type="System.Decimal" DbType="Decimal(10,6) NOT NULL" CanBeNull="false" />
+      <Column Name="LONGITUD_DESTINO" Type="System.Decimal" DbType="Decimal(10,6) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_ObtenerVehiculo" Method="SP_ObtenerVehiculo">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="SP_ObtenerVehiculoResult">
+      <Column Name="MARCA" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MODELO" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ANO" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_ObtenerUsuarioPorGuid" Method="SP_ObtenerUsuarioPorGuid">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="SP_ObtenerUsuarioPorGuidResult">
+      <Column Name="GUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="APELLIDOS" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CORREO_ELECTRONICO" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DIRECCION" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PASSWORD" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TIPO_DE_CARGADOR" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ESTADO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FECHA_REGISTRO" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_ObtenerUsuarioPorCorreo" Method="SP_ObtenerUsuarioPorCorreo">
+    <Parameter Name="CORREO_ELECTRONICO" Parameter="cORREO_ELECTRONICO" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="SP_ObtenerUsuarioPorCorreoResult">
+      <Column Name="GUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="APELLIDOS" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CORREO_ELECTRONICO" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DIRECCION" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TIPO_DE_CARGADOR" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ESTADO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FECHA_REGISTRO" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_ObtenerHistorialConsumo" Method="SP_ObtenerHistorialConsumo">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="SP_ObtenerHistorialConsumoResult">
+      <Column Name="NombreReferencia" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ConsumoKwh" Type="System.Decimal" DbType="Decimal(18,4) NOT NULL" CanBeNull="false" />
+      <Column Name="Monto" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaConsumo" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_ObtenerHistorial" Method="SP_ObtenerHistorial">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="SP_ObtenerHistorialResult">
+      <Column Name="ID_HISTORIAL" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="NOMBRE_UBICACION" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="LATITUD" Type="System.Decimal" DbType="Decimal(10,6) NOT NULL" CanBeNull="false" />
+      <Column Name="LONGITUD" Type="System.Decimal" DbType="Decimal(10,6) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_LoginUsuario" Method="SP_LoginUsuario">
+    <Parameter Name="CORREO_ELECTRONICO" Parameter="cORREO_ELECTRONICO" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="SP_LoginUsuarioResult">
+      <Column Name="GUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="NOMBRE" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="APELLIDOS" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CORREO_ELECTRONICO" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PASSWORD" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="DIRECCION" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TIPO_DE_CARGADOR" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ESTADO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FECHA_REGISTRO" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_InsertarVehiculo" Method="SP_InsertarVehiculo">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="MARCA" Parameter="mARCA" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="MODELO" Parameter="mODELO" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="ANO" Parameter="aNO" Type="System.Int32" DbType="Int" />
+    <ElementType Name="SP_InsertarVehiculoResult">
+      <Column Name="Resultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(31) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_InsertarViajeGuardado" Method="SP_InsertarViajeGuardado">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="NOMBRE_VIAJE" Parameter="nOMBRE_VIAJE" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="LATITUD_DESTINO" Parameter="lATITUD_DESTINO" Type="System.Decimal" DbType="Decimal(10,6)" />
+    <Parameter Name="LONGITUD_DESTINO" Parameter="lONGITUD_DESTINO" Type="System.Decimal" DbType="Decimal(10,6)" />
+    <ElementType Name="SP_InsertarViajeGuardadoResult">
+      <Column Name="Resultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(28) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_EliminarViajeGuardado" Method="SP_EliminarViajeGuardado">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="NOMBRE_VIAJE" Parameter="nOMBRE_VIAJE" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="LATITUD_DESTINO" Parameter="lATITUD_DESTINO" Type="System.Decimal" DbType="Decimal(10,6)" />
+    <Parameter Name="LONGITUD_DESTINO" Parameter="lONGITUD_DESTINO" Type="System.Decimal" DbType="Decimal(10,6)" />
+    <ElementType Name="SP_EliminarViajeGuardadoResult">
+      <Column Name="Resultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(33) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_InsertarUsuario" Method="SP_InsertarUsuario">
+    <Parameter Name="NOMBRE" Parameter="nOMBRE" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="APELLIDOS" Parameter="aPELLIDOS" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="CORREO_ELECTRONICO" Parameter="cORREO_ELECTRONICO" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="PASSWORD" Parameter="pASSWORD" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="DIRECCION" Parameter="dIRECCION" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="TIPO_DE_CARGADOR" Parameter="tIPO_DE_CARGADOR" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="NUMERO_VERIFICACION" Parameter="nUMERO_VERIFICACION" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="SP_InsertarUsuarioResult">
+      <Column Name="Resultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(28) NOT NULL" CanBeNull="false" />
+      <Column Name="GUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_InsertarHistorial" Method="SP_InsertarHistorial">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="NOMBRE_UBICACION" Parameter="nOMBRE_UBICACION" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="LATITUD" Parameter="lATITUD" Type="System.Decimal" DbType="Decimal(10,6)" />
+    <Parameter Name="LONGITUD" Parameter="lONGITUD" Type="System.Decimal" DbType="Decimal(10,6)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_InsertarConsumoEnergia" Method="SP_InsertarConsumoEnergia">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="NOMBRE_REFERENCIA" Parameter="nOMBRE_REFERENCIA" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="CONSUMO_KWH" Parameter="cONSUMO_KWH" Type="System.Decimal" DbType="Decimal(18,4)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_InsertarBitacora" Method="SP_InsertarBitacora">
+    <Parameter Name="CLASE" Parameter="cLASE" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="METODO" Parameter="mETODO" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="TIPO" Parameter="tIPO" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="ERROR_ID" Parameter="eRROR_ID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DESCRIPCION" Parameter="dESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="REQUEST" Parameter="rEQUEST" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="RESPONSE" Parameter="rESPONSE" Type="System.String" DbType="NVarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_EliminarUsuario" Method="SP_EliminarUsuario">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="SP_EliminarUsuarioResult">
+      <Column Name="Resultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(31) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_EliminarHistorial" Method="SP_EliminarHistorial">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="ID_HISTORIAL" Parameter="iD_HISTORIAL" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="SP_EliminarHistorialResult">
+      <Column Name="Resultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(33) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_ActualizarUsuario" Method="SP_ActualizarUsuario">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="NOMBRE" Parameter="nOMBRE" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="APELLIDOS" Parameter="aPELLIDOS" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="DIRECCION" Parameter="dIRECCION" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="TIPO_DE_CARGADOR" Parameter="tIPO_DE_CARGADOR" Type="System.String" DbType="NVarChar(50)" />
+    <ElementType Name="SP_ActualizarUsuarioResult">
+      <Column Name="Resultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Mensaje" Type="System.String" DbType="VarChar(33) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_ActivarUsuario" Method="SP_ActivarUsuario">
+    <Parameter Name="CORREO_ELECTRONICO" Parameter="cORREO_ELECTRONICO" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="NUMERO_VERIFICACION" Parameter="nUMERO_VERIFICACION" Type="System.String" DbType="NVarChar(MAX)" />
+    <ElementType Name="SP_ActivarUsuarioResult">
+      <Column Name="Resultado" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_ActualizarVehiculo" Method="SP_ActualizarVehiculo">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="MARCA" Parameter="mARCA" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="MODELO" Parameter="mODELO" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="ANO" Parameter="aNO" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_EliminarVehiculo" Method="SP_EliminarVehiculo">
+    <Parameter Name="GUID_USUARIO" Parameter="gUID_USUARIO" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

@@ -1,0 +1,23 @@
+# Actividad Kotlin del módulo nav (referenciada solo desde el manifiesto / Intent; R8 puede eliminarla).
+-keep class com.eva.nav.** { *; }
+
+# AndroidX Startup (Mapbox / AppInitializer).
+-keep class androidx.startup.** { *; }
+-keep interface androidx.startup.Initializer { *; }
+-keep class * implements androidx.startup.Initializer {
+    <init>();
+}
+
+# Mapbox (manifest + reflexión + Kotlin / impl interna; sin esto: NoClassDefFoundError en MapboxOptionsImpl u otras).
+-keep class com.mapbox.** { *; }
+-keep interface com.mapbox.** { *; }
+-keepclassmembers class com.mapbox.** { *; }
+-keep class com.mapbox.common.MapboxOptions { *; }
+-keep class com.mapbox.common.MapboxOptionsImpl { *; }
+-keep class com.mapbox.common.MapboxOptions$* { *; }
+-keep class com.mapbox.maps.loader.MapboxMapsInitializer { *; }
+-keep class com.mapbox.common.MapboxSDKCommonInitializer { *; }
+-dontwarn com.mapbox.**
+
+# Kotlin (metadatos / sintéticos que Mapbox puede usar en cadena de carga).
+-keep class kotlin.Metadata { *; }

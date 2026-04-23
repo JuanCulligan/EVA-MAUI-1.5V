@@ -1,0 +1,109 @@
+plugins {
+    id "com.android.library"
+    id "org.jetbrains.kotlin.android"
+}
+
+android {
+    namespace "com.eva.nav"
+    compileSdk 34
+
+    defaultConfig {
+        minSdk 21
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "androidx.startup:startup-runtime:1.2.0"
+    implementation "com.google.android.material:material:1.12.0"
+
+    // Solo Maps SDK (MapView + MapboxOptions). Navigation SDK añade mucho classpath y choca con MAUI al copiar deps.
+    // android-ndk27: bibliotecas .so alineadas a 16 KB (Android 15+ / emulador); sin esto: crash nativo (SYSTEM_TOMBSTONE), sin FATAL EXCEPTION Java.
+    // Cuando integres turn-by-turn nativo, vuelve a añadir navigationcore y revisa el filtro de exportMauiDeps.
+    implementation "com.mapbox.maps:android-ndk27:11.10.2"
+}
+
+// El .aar del library NO incluye dependencias transitivas. MAUI solo enlaza nav-release.aar → faltan
+// com.mapbox.common.MapboxOptions, etc. Copiamos el classpath de release para que dotnet las empaquete.
+tasks.register('exportMauiDeps') {
+    group = 'build'
+    description = 'Copia AAR/JAR de releaseRuntimeClasspath para el proyecto MAUI.'
+    dependsOn 'assembleRelease'
+    doLast {
+        def dest = file("$buildDir/outputs/maui-deps")
+        dest.mkdirs()
+        def cfg = configurations.findByName('releaseRuntimeClasspath')
+            ?: configurations.findByName('releaseCompileClasspath')
+        if (cfg == null) {
+            throw new RuntimeException('No se encontró releaseRuntimeClasspath ni releaseCompileClasspath.')
+        }
+
+        // NO quitar libc++_shared.so de los AAR: MAUI/.NET Android no la empaqueta para el JNI de Mapbox;
+        // al borrarla, libmapbox-common.so falla con UnsatisfiedLinkError y MapboxOptionsImpl → NoClassDefFoundError.
+
+        // No copiar AndroidX / Material / Play Services: MAUI ya los aporta → R.java duplicado (XAJVC).
+        // com.google.code.gson: MAUI ya empaqueta GoogleGson.aar → duplicar gson-*.jar rompe D8/R8 (JAVA0000).
+        // com.google.errorprone: MAUI ya empaqueta Xamarin.Google.ErrorProne.Annotations.aar.
+        def skipGroups = [
+            'androidx.',
+            'com.google.android.material',
+            'com.google.android.gms',
+            'com.google.firebase',
+            'com.google.code.gson',
+            'com.google.errorprone',
+            'com.android.support'
+        ]
+        cfg.resolvedConfiguration.resolvedArtifacts.each { artifact ->
+            def mid = artifact.moduleVersion.id
+            def g = mid.group
+            if (skipGroups.any { g.startsWith(it) }) {
+                return
+            }
+            // org.jetbrains:annotations → MAUI ya trae Xamarin.Jetbrains.Annotations.aar (no usar prefijo org.jetbrains: quitaría kotlin).
+            if (g == 'org.jetbrains' && mid.name == 'annotations') {
+                return
+            }
+            // kotlin-stdlib*: MAUI ya trae Xamarin.Kotlin.StdLib.aar
+            if (g == 'org.jetbrains.kotlin' && mid.name.startsWith('kotlin-stdlib')) {
+                return
+            }
+            // kotlinx-coroutines*: MAUI ya trae Xamarin.KotlinX.Coroutines.* (p. ej. Android)
+            if (g == 'org.jetbrains.kotlinx' && mid.name.startsWith('kotlinx-coroutines')) {
+                return
+            }
+            def f = artifact.file
+            if (f.name.endsWith('.aar') || f.name.endsWith('.jar')) {
+                copy {
+                    from f
+                    into dest
+                }
+            }
+        }
+    }
+}
+
+tasks.register('touchMauiDepsExported') {
+    dependsOn 'exportMauiDeps'
+    doLast {
+        def stamp = file("$buildDir/outputs/maui-deps/exported")
+        stamp.parentFile.mkdirs()
+        stamp.text = System.currentTimeMillis().toString()
+    }
+}
+

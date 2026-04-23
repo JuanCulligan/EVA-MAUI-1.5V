@@ -1,0 +1,31 @@
+import org.gradle.authentication.http.BasicAuthentication
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    // FAIL_ON_PROJECT_REPOS rompe si existe un init global (p. ej. ~/.gradle/init.d/mapbox-repo.gradle)
+    // que añade repos en allprojects; CI y equipos locales pueden tener ese script.
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://api.mapbox.com/downloads/v2/releases/maven"
+            authentication { basic(BasicAuthentication) }
+            credentials {
+                username = "mapbox"
+                password = System.getenv("MAPBOX_DOWNLOADS_TOKEN")
+            }
+        }
+    }
+}
+
+rootProject.name = "AndroidNav"
+include(":nav")
+

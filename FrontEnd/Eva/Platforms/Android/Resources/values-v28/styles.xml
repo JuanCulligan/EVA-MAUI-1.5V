@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- API 28+: contenido bajo recorte/notch (mapa edge-to-edge coherente con MainActivity). -->
+    <style name="EvaTheme" parent="@style/Maui.SplashTheme">
+        <item name="android:statusBarColor">@color/app_bar_background</item>
+        <item name="android:navigationBarColor">@color/app_bar_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+</resources>

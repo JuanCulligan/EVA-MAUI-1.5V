@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_primary">#512BD4</color>
+    <!-- Mismo tono que el fondo de la app para unificar barras del sistema -->
+    <color name="app_bar_background">#0D0D0D</color>
+</resources>

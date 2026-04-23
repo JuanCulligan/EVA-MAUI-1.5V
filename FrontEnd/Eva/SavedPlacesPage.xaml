@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ent="clr-namespace:Eva.Entidades"
+             x:Class="Eva.SavedPlacesPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#0D0D0D">
+
+    <Grid>
+        <Image
+            Source="circles_pattern.svg"
+            Aspect="AspectFill"
+            Opacity="1"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+        <BoxView Color="#0D0D0D" Opacity="0.55" HorizontalOptions="Fill" VerticalOptions="Fill" />
+
+        <Grid RowDefinitions="Auto,*">
+            <VerticalStackLayout
+                Grid.Row="0"
+                Padding="32,48,32,12"
+                Spacing="0">
+
+                <Label
+                    Text="← Volver"
+                    FontSize="14"
+                    TextColor="#888888"
+                    Margin="0,0,0,8">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnVolverTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label x:Name="lblTitle"
+                       Text="Mis lugares"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="#E5E5E5"
+                       Margin="0,0,0,8" />
+
+                <Label x:Name="lblPickHint"
+                       Text="Toca un lugar para iniciar el viaje. En Configuración puedes crear casa, trabajo u otros."
+                       FontSize="13"
+                       TextColor="#888888"
+                       LineBreakMode="WordWrap"
+                       IsVisible="True"
+                       Margin="0,0,0,8" />
+            </VerticalStackLayout>
+
+            <Grid
+                Grid.Row="1"
+                Padding="32,0,32,32"
+                RowDefinitions="Auto,*"
+                RowSpacing="14">
+
+                <VerticalStackLayout x:Name="panelAdd"
+                                     Grid.Row="0"
+                                     Spacing="14"
+                                     IsVisible="True">
+
+                    <Label Text="Nuevo lugar"
+                           FontSize="13"
+                           TextColor="#888888" />
+
+                    <Border Stroke="#2A2A2A"
+                            StrokeThickness="1"
+                            BackgroundColor="#1A1A1A"
+                            Padding="12,0"
+                            HeightRequest="52"
+                            StrokeShape="RoundRectangle 12">
+                        <Picker x:Name="pickerKind"
+                                Title="Tipo"
+                                TextColor="#E5E5E5"
+                                TitleColor="#666666"
+                                FontSize="15"
+                                VerticalOptions="Center"
+                                BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Border Stroke="#2A2A2A"
+                            StrokeThickness="1"
+                            BackgroundColor="#1A1A1A"
+                            Padding="16,0"
+                            HeightRequest="52"
+                            StrokeShape="RoundRectangle 12">
+                        <Entry x:Name="entryNombre"
+                               Placeholder="Nombre (ej. Casa)"
+                               PlaceholderColor="#666666"
+                               TextColor="#E5E5E5"
+                               FontSize="15"
+                               VerticalOptions="Center"
+                               BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Border Stroke="#2A2A2A"
+                            StrokeThickness="1"
+                            BackgroundColor="#1A1A1A"
+                            Padding="16,0"
+                            HeightRequest="52"
+                            StrokeShape="RoundRectangle 12">
+                        <Entry x:Name="entryNota"
+                               Placeholder="Nota de dirección (opcional)"
+                               PlaceholderColor="#666666"
+                               TextColor="#E5E5E5"
+                               FontSize="15"
+                               VerticalOptions="Center"
+                               BackgroundColor="Transparent" />
+                    </Border>
+
+                    <Label x:Name="lblCoords"
+                           FontSize="12"
+                           TextColor="#6B7280"
+                           Text="Coordenadas: —" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <Button Grid.Column="0"
+                                Text="Usar mi ubicación"
+                                Clicked="OnUsarUbicacionClicked"
+                                BackgroundColor="#2A2A2A"
+                                TextColor="#E5E5E5"
+                                FontSize="15"
+                                CornerRadius="12"
+                                HeightRequest="52"
+                                BorderWidth="0" />
+                        <Button Grid.Column="1"
+                                Text="Guardar"
+                                Clicked="OnGuardarClicked"
+                                BackgroundColor="#2A2A2A"
+                                TextColor="#E5E5E5"
+                                FontSize="15"
+                                CornerRadius="12"
+                                HeightRequest="52"
+                                BorderWidth="0" />
+                    </Grid>
+                </VerticalStackLayout>
+
+                <Grid Grid.Row="1">
+                <CollectionView x:Name="listPlaces"
+                                  SelectionMode="None"
+                                  EmptyView="No hay lugares guardados.">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="ent:SavedPlace">
+                            <Border Margin="0,0,0,10"
+                                    Stroke="#2A2A2A"
+                                    StrokeThickness="1"
+                                    BackgroundColor="#1A1A1A"
+                                    Padding="16,14"
+                                    StrokeShape="RoundRectangle 12">
+                                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                    <VerticalStackLayout Grid.Column="0">
+                                        <Label Text="{Binding Name}"
+                                               FontSize="16"
+                                               FontAttributes="Bold"
+                                               TextColor="#E5E5E5" />
+                                        <Label Text="{Binding Kind}"
+                                               FontSize="12"
+                                               TextColor="#888888" />
+                                        <Label Text="{Binding AddressNote}"
+                                               FontSize="11"
+                                               TextColor="#666666"
+                                               LineBreakMode="TailTruncation"
+                                               MaxLines="2" />
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="1"
+                                            Text="✕"
+                                            FontSize="16"
+                                            WidthRequest="44"
+                                            HeightRequest="44"
+                                            Padding="0"
+                                            BackgroundColor="#3F1D1D"
+                                            TextColor="#FCA5A5"
+                                            CornerRadius="10"
+                                            VerticalOptions="Center"
+                                            Clicked="OnEliminarClicked" />
+                                </Grid>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnItemTapped" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <ActivityIndicator x:Name="spinner"
+                                   IsRunning="False"
+                                   IsVisible="False"
+                                   Color="#E5E5E5"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

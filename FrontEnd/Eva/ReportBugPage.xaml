@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eva.ReportBugPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#0D0D0D">
+
+    <Grid>
+        <Image
+            Source="circles_pattern.svg"
+            Aspect="AspectFill"
+            Opacity="1"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+        <BoxView Color="#0D0D0D" Opacity="0.55" HorizontalOptions="Fill" VerticalOptions="Fill" />
+
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="32,48,32,40"
+                Spacing="0"
+                HorizontalOptions="Fill">
+
+                <Label
+                    Text="← Volver"
+                    FontSize="14"
+                    TextColor="#888888"
+                    Margin="0,0,0,8">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnVolverTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label
+                    Text="Reportar problema"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    TextColor="#E5E5E5"
+                    Margin="0,0,0,8" />
+                <Label
+                    Text="Cuéntanos qué falló. Se abrirá tu app de correo con el mensaje listo para enviar a soporte."
+                    FontSize="13"
+                    TextColor="#888888"
+                    LineBreakMode="WordWrap"
+                    Margin="0,0,0,24" />
+
+                <Label Text="Asunto"
+                       FontSize="13"
+                       TextColor="#888888"
+                       Margin="0,0,0,8" />
+                <Border Stroke="#2A2A2A"
+                        StrokeThickness="1"
+                        BackgroundColor="#1A1A1A"
+                        Padding="16,0"
+                        HeightRequest="52"
+                        StrokeShape="RoundRectangle 12"
+                        Margin="0,0,0,14">
+                    <Entry x:Name="entryAsunto"
+                           Placeholder="Ej. El mapa no carga"
+                           PlaceholderColor="#666666"
+                           TextColor="#E5E5E5"
+                           FontSize="15"
+                           VerticalOptions="Center"
+                           BackgroundColor="Transparent" />
+                </Border>
+
+                <Label Text="Descripción"
+                       FontSize="13"
+                       TextColor="#888888"
+                       Margin="0,0,0,8" />
+                <Border Stroke="#2A2A2A"
+                        StrokeThickness="1"
+                        BackgroundColor="#1A1A1A"
+                        Padding="16"
+                        MinimumHeightRequest="160"
+                        StrokeShape="RoundRectangle 12"
+                        Margin="0,0,0,24">
+                    <Editor x:Name="editorDetalle"
+                            Placeholder="Pasos para reproducir el error, mensaje en pantalla, etc."
+                            PlaceholderColor="#666666"
+                            TextColor="#E5E5E5"
+                            FontSize="15"
+                            AutoSize="TextChanges"
+                            MinimumHeightRequest="140"
+                            BackgroundColor="Transparent" />
+                </Border>
+
+                <Button Text="Enviar por correo"
+                        Clicked="OnEnviarClicked"
+                        BackgroundColor="#2A2A2A"
+                        TextColor="#E5E5E5"
+                        FontSize="16"
+                        CornerRadius="12"
+                        HeightRequest="52"
+                        BorderWidth="0" />
+
+                <Label x:Name="SupportDestinationLabel"
+                       FontSize="12"
+                       TextColor="#6B7280"
+                       HorizontalOptions="Center"
+                       Margin="0,16,0,0" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

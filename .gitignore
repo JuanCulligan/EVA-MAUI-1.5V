@@ -1,0 +1,42 @@
+# Build outputs
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+packages/
+*.nupkg
+
+# Logs
+*.log
+
+# Web static/vendor bundles
+API/Content/bootstrap*
+API/Scripts/bootstrap*
+API/Scripts/jquery*
+API/Scripts/modernizr*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / archives
+.idea/
+*.zip
+
+# Local Gradle caches (MAUI / AndroidNav)
+.gradle-local/
+.gradle-user-home/
+
+# Legacy nested clone (own .git); use BackEnd/ in repo instead
+Back end/
+
+# Local debug captures
+FrontEnd/Eva/_debug/

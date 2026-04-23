@@ -1,0 +1,28 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:2:1-10:12
+INJECTED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:2:1-10:12
+	package
+		INJECTED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:3:3-9:17
+activity#com.eva.nav.NativeNavigationActivity
+ADDED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:4:5-8:78
+	android:launchMode
+		ADDED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:7:7-38
+	android:exported
+		ADDED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:6:7-31
+	android:theme
+		ADDED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:8:7-75
+	android:name
+		ADDED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:5:7-58
+uses-sdk
+INJECTED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml
+INJECTED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml

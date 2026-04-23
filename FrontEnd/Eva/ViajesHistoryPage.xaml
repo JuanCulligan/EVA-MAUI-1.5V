@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:dto="clr-namespace:Eva.DTO"
+             x:Class="Eva.ViajesHistoryPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#0D0D0D">
+
+    <Grid>
+        <Image
+            Source="circles_pattern.svg"
+            Aspect="AspectFill"
+            Opacity="1"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+        <BoxView Color="#0D0D0D" Opacity="0.55" HorizontalOptions="Fill" VerticalOptions="Fill" />
+
+        <Grid RowDefinitions="Auto,*" Padding="32,48,32,24">
+            <VerticalStackLayout Grid.Row="0" Spacing="0" Margin="0,0,0,16">
+                <Label
+                    Text="← Volver"
+                    FontSize="14"
+                    TextColor="#888888"
+                    Margin="0,0,0,8">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnVolverTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                <Label
+                    Text="Historial de viajes"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    TextColor="#E5E5E5"
+                    Margin="0,0,0,8" />
+                <Label x:Name="lblStatus"
+                       FontSize="13"
+                       TextColor="#888888"
+                       LineBreakMode="WordWrap" />
+                <Label Text="Desliza hacia la izquierda en un destino para eliminarlo, o mantenlo pulsado un momento."
+                       FontSize="12"
+                       TextColor="#6B7280"
+                       LineBreakMode="WordWrap"
+                       Margin="0,6,0,0" />
+            </VerticalStackLayout>
+
+            <RefreshView x:Name="refreshView" Grid.Row="1" Refreshing="OnRefreshing">
+                <CollectionView x:Name="listViajes" EmptyView="No hay ubicaciones recientes.">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="dto:LocationRowDto">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem
+                                            Text="Eliminar"
+                                            BackgroundColor="#7f1d1d"
+                                            Invoked="OnHistorialSwipeEliminar" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <Border Stroke="#2A2A2A"
+                                        StrokeThickness="1"
+                                        BackgroundColor="#1A1A1A"
+                                        Padding="16,14"
+                                        Margin="0,0,0,10"
+                                        StrokeShape="RoundRectangle 12">
+                                    <Border.GestureRecognizers>
+                                        <PointerGestureRecognizer
+                                            PointerPressed="OnHistorialPointerPressed"
+                                            PointerReleased="OnHistorialPointerReleased" />
+                                    </Border.GestureRecognizers>
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label Text="{Binding locationName}"
+                                               FontSize="16"
+                                               FontAttributes="Bold"
+                                               TextColor="#E5E5E5" />
+                                        <HorizontalStackLayout Spacing="10">
+                                            <Label Text="{Binding lat, StringFormat='Lat: {0:F4}'}"
+                                                   FontSize="12"
+                                                   TextColor="#737373" />
+                                            <Label Text="{Binding lon, StringFormat='Lon: {0:F4}'}"
+                                                   FontSize="12"
+                                                   TextColor="#737373" />
+                                        </HorizontalStackLayout>
+                                    </VerticalStackLayout>
+                                </Border>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <ActivityIndicator x:Name="spinner"
+                               Grid.Row="1"
+                               IsRunning="False"
+                               IsVisible="False"
+                               Color="#E5E5E5"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentPage>

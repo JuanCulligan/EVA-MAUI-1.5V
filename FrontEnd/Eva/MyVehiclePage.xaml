@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Eva.MyVehiclePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#0D0D0D">
+
+    <Grid>
+        <Image Source="circles_pattern.svg" Aspect="AspectFill" Opacity="1" HorizontalOptions="Fill" VerticalOptions="Fill" />
+        <BoxView Color="#0D0D0D" Opacity="0.55" HorizontalOptions="Fill" VerticalOptions="Fill" />
+
+        <ScrollView>
+            <VerticalStackLayout Padding="32,48,32,40" Spacing="0" HorizontalOptions="Fill">
+                <Label Text="← Volver" FontSize="14" TextColor="#888888" Margin="0,0,0,8">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnVolverTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="Mi vehículo" FontSize="22" FontAttributes="Bold" TextColor="#E5E5E5" Margin="0,0,0,8" />
+                <Label Text="Marca, modelo y año se guardan en el servidor para consumos y estimaciones del backend. Wh/km y precio kWh ajustan solo la vista previa del mapa en el teléfono."
+                       FontSize="13" TextColor="#888888" LineBreakMode="WordWrap" Margin="0,0,0,20" />
+
+                <Label Text="Marca" FontSize="13" TextColor="#888888" Margin="0,0,0,6" />
+                <Entry x:Name="entryBrand" Placeholder="Marca" TextColor="#E5E5E5" PlaceholderColor="#666666"
+                       BackgroundColor="#1A1A1A" Margin="0,0,0,12" />
+
+                <Label Text="Modelo" FontSize="13" TextColor="#888888" Margin="0,0,0,6" />
+                <Entry x:Name="entryModel" Placeholder="Modelo" TextColor="#E5E5E5" PlaceholderColor="#666666"
+                       BackgroundColor="#1A1A1A" Margin="0,0,0,12" />
+
+                <Label Text="Año" FontSize="13" TextColor="#888888" Margin="0,0,0,6" />
+                <Entry x:Name="entryYear" Placeholder="Ej. 2023" Keyboard="Numeric" TextColor="#E5E5E5" PlaceholderColor="#666666"
+                       BackgroundColor="#1A1A1A" Margin="0,0,0,12" />
+
+                <Label Text="Consumo referencia (Wh/km) — mapa" FontSize="13" TextColor="#888888" Margin="0,8,0,6" />
+                <Entry x:Name="entryWhKm" Placeholder="165" Keyboard="Numeric" TextColor="#E5E5E5" PlaceholderColor="#666666"
+                       BackgroundColor="#1A1A1A" Margin="0,0,0,12" />
+
+                <Label Text="Precio electricidad (₡ por kWh) — mapa" FontSize="13" TextColor="#888888" Margin="0,0,0,6" />
+                <Entry x:Name="entryCrcKwh" Placeholder="95" Keyboard="Numeric" TextColor="#E5E5E5" PlaceholderColor="#666666"
+                       BackgroundColor="#1A1A1A" Margin="0,0,0,20" />
+
+                <ActivityIndicator x:Name="spinner" IsVisible="False" IsRunning="False" Color="#E5E5E5" Margin="0,0,0,12" />
+
+                <Button x:Name="btnSave" Text="Guardar vehículo" Clicked="OnGuardarClicked" BackgroundColor="#2563EB" TextColor="White"
+                        FontSize="16" CornerRadius="12" HeightRequest="52" BorderWidth="0" Margin="0,0,0,10" />
+
+                <Button x:Name="btnDelete" Text="Eliminar vehículo" Clicked="OnEliminarClicked" BackgroundColor="#3F1D1D" TextColor="#FCA5A5"
+                        FontSize="16" CornerRadius="12" HeightRequest="52" BorderWidth="0" IsVisible="False" />
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,21 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.eva.nav" >
+4
+5    <uses-sdk android:minSdkVersion="21" />
+6
+7    <application>
+7-->/Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:3:3-9:17
+8        <activity
+8-->/Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:4:5-8:78
+9            android:name="com.eva.nav.NativeNavigationActivity"
+9-->/Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:5:7-58
+10            android:exported="false"
+10-->/Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:6:7-31
+11            android:launchMode="singleTask"
+11-->/Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:7:7-38
+12            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+12-->/Users/MAC/Downloads/EVA/FrontEnd/Eva/AndroidNav/nav/src/main/AndroidManifest.xml:8:7-75
+13    </application>
+14
+15</manifest>

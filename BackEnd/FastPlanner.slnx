@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="API/API.csproj" Id="1372f7d6-6c9c-4977-b014-5388caef902d" />
+  <Project Path="Core/Core.csproj" Id="85109ef1-ff0f-4e8c-823c-b0f3e3c01026" />
+  <Project Path="DataAccess/DataAccess.csproj" Id="5f4ccd23-3e11-4c0a-a4eb-342ae01ea4f5" />
+  <Project Path="DTO/DTO.csproj" Id="5ed55c47-80af-4216-94f6-9b89805c5d70" />
+  <Project Path="Helpers/Helpers.csproj" Id="60b6c2af-ceef-46b6-9cbb-a7bab9af6819" />
+  <Project Path="Logic/Logic.csproj" Id="4508ad34-9ab9-4299-9d8e-79283aee3f88" />
+</Solution>
